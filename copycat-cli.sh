@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 # CopyCat-CLI v1.0
 # Mirror | Recon | Organize
-# Author : Hinata (assistant to Lucky)
+# Author : Hackops-Academy
 # File   : copycat-cli.sh
 # Usage  : chmod +x copycat-cli.sh && ./copycat-cli.sh
 # Note   : Use only on targets you are authorized to test.
