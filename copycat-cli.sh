@@ -28,11 +28,22 @@ CONFIG_FILE="$HOME/.copycatrc"
 ###########################
 print_banner() {
 cat <<'BANNER'
+
+ ██████╗ ██████╗ ██████╗ ██╗   ██╗ ██████╗ █████╗ ████████╗    ██████╗██╗     ██╗
+██╔════╝██╔═══██╗██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗╚══██╔══╝   ██╔════╝██║     ██║
+██║     ██║   ██║██████╔╝ ╚████╔╝ ██║     ███████║   ██║█████╗██║     ██║     ██║
+██║     ██║   ██║██╔═══╝   ╚██╔╝  ██║     ██╔══██║   ██║╚════╝██║     ██║     ██║
+╚██████╗╚██████╔╝██║        ██║   ╚██████╗██║  ██║   ██║      ╚██████╗███████╗██║
+ ╚═════╝ ╚═════╝ ╚═╝        ╚═╝    ╚═════╝╚═╝  ╚═╝   ╚═╝       ╚═════╝╚══════╝╚═╝
+                                                                                 
+
    /\_/\    [ CopyCat-CLI ]
   ( o.o )   Mirror | Recon | Organize
    > ^ <
-  ------------------------------------
+  --------------------------------------
   Capture sites, extract JS, take notes
+  --------------------------------------
+  Made By Hackops-Academy
 BANNER
 }
 
@@ -338,10 +349,10 @@ main_menu() {
     print_banner
     echo
     echo "CopyCat-CLI Main Menu"
-    echo "1) Quick mirror (wget)"
-    echo "2) Mirror + Recon (wget + subfinder/gau/gobuster + nmap)"
-    echo "3) Mirror with httrack (if installed)"
-    echo "4) Install recommended tools (system + go tools)"
+    echo "1) Quick mirror "
+    echo "2) Mirror + Recon "
+    echo "3) Mirror with httrack "
+    echo "4) Install recommended tools "
     echo "5) Show last workspace path"
     echo "6) Exit"
     echo
@@ -352,7 +363,7 @@ main_menu() {
       3) action_httrack ;;
       4) action_install_tools ;;
       5) echo "Last workspace: ${WORKDIR:-<none>}"; pause ;;
-      6) log "Exiting."; exit 0 ;;
+      6) log "Exiting... "stay anonymous. stay legal"; exit 0 ;;
       *) echo "Invalid choice"; pause ;;
     esac
   done
@@ -456,7 +467,7 @@ action_httrack() {
 }
 
 action_install_tools() {
-  log "Installing recommended system packages (wget httrack git nmap jq gobuster ffuf)"
+  log "Installing recommended system packages "
   read -rp "Proceed with system install? [y/N]: " ok
   if [[ ! "$ok" =~ ^[Yy]$ ]]; then echo "Skipping"; pause; return; fi
   pm=$(detect_pkg_mgr)
