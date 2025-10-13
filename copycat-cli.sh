@@ -52,7 +52,7 @@ BANNER
 ###########################
 log()  { printf "[%s] %s\n" "$(date '+%F %T')" "$*"; }
 err()  { printf "[%s] ERROR: %s\n" "$(date '+%F %T')" "$*" >&2; exit 1; }
-pause(){ read -rp "Press ENTER to continue..."; }
+pause(){ read -rp "Press ENTER to continue..." _dummy || true; }
 
 detect_pkg_mgr() {
   if command -v apt-get >/dev/null 2>&1; then echo "apt-get"
@@ -363,7 +363,7 @@ main_menu() {
       3) action_httrack ;;
       4) action_install_tools ;;
       5) echo "Last workspace: ${WORKDIR:-<none>}"; pause ;;
-      6) log "Exiting... "stay anonymous. stay legal"; exit 0 ;;
+      6) log "Exiting... stay anonymous. stay legal"; exit 0 ;;
       *) echo "Invalid choice"; pause ;;
     esac
   done
