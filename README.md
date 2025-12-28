@@ -33,3 +33,30 @@ A high-performance, universal web mirroring and reconnaissance framework designe
 ## 🛠 Usage Guide
 Upon launching, select Option [I] to ensure your environment is fully configured.
 
+| Option | Action | Description |
+| :--- | :---: | ---: |
+| [1] | Quick Site Mirror (Human-Redable)| Downloads full site and convert it into a clean, redable folder tree|
+| [2] | Full Recon (Subdomains + Ports) | Performs subdomain discovery & Nmap scans on the target domain|
+| [3] | JavaScript & Endpoint Extractor| Analyzes downloaded scripts to find API keys, endpoints, and sensitive paths|
+| [I] | Install/Fix Dependencies | Auto-installs wget, nmap, jq, and configures Go-paths|
+| [0] | Exit | To exit the tool|
+
+---
+
+## 📂 Output Structure
+When a task is completed, CopyCat-CLI generates a workspace:
+
+```text
+copycat_20241020_[example.com/](https://example.com/)
+├── mirror/              # The "Human-Readable" cloned site
+│   ├── index.html
+│   └── assets/          # Cleaned CSS, JS, and Images
+├── scans/               # Subdomain and Nmap results
+└── metadata/            # Extracted endpoints and JS refs
+```
+---
+
+## 🛡 Disclaimer
+This tool is intended for educational purposes and authorized security testing only. Mirroring or scanning targets without explicit permission is illegal.
+**Developed by Hackops-Academy**
+
