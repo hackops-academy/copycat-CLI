@@ -7,9 +7,12 @@ A high-performance, universal web mirroring and reconnaissance framework designe
 ## 🚀 Features
 
 **•​ Human-Readable Mirroring:** Automatically cleans up wget clutter, organizes assets into css/, js/, and images/, and fixes broken extensions.
+
 **•​ Deep Recon:** Integrated subdomain enumeration via crt.sh and fast port scanning with Nmap.
 ​Endpoint Extraction: Scrapes mirrored files for URLs, hidden endpoints, and cloud storage links.
+
 **• ​Universal Installer:** One-click dependency setup for both pkg (Termux) and apt (Kali).
+
 **• ​Smart Workspaces:** Organized folder structures named by timestamp and target for easy data management.
 
 ---
@@ -22,7 +25,7 @@ A high-performance, universal web mirroring and reconnaissance framework designe
    ```
 2. Set Permissions
    ```bash
-   chmod +x copycat-cli.sh
+   chmod +x copycat-CLI.sh
    ```
 3. Run the Tool
    ```bash
@@ -34,7 +37,7 @@ A high-performance, universal web mirroring and reconnaissance framework designe
 Upon launching, select Option [I] to ensure your environment is fully configured.
 
 | Option | Action | Description |
-| :--- | :---: | ---: |
+| :--- | :-------: | --------------: |
 | [1] | Quick Site Mirror (Human-Redable)| Downloads full site and convert it into a clean, redable folder tree|
 | [2] | Full Recon (Subdomains + Ports) | Performs subdomain discovery & Nmap scans on the target domain|
 | [3] | JavaScript & Endpoint Extractor| Analyzes downloaded scripts to find API keys, endpoints, and sensitive paths|
@@ -57,6 +60,8 @@ copycat_20241020_[example.com/](https://example.com/)
 ---
 
 ## 🛡 Disclaimer
+
 This tool is intended for educational purposes and authorized security testing only. Mirroring or scanning targets without explicit permission is illegal.
+
 **Developed by Hackops-Academy**
 
