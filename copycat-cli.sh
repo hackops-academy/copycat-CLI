@@ -40,6 +40,8 @@ print_banner() {
 ╚██████╗╚██████╔╝██║        ██║   ╚██████╗██║  ██║   ██║      
  ╚═════╝ ╚═════╝ ╚═╝        ╚═╝    ╚═════╝╚═╝  ╚═╝   ╚═╝      
                                  [ CLI-MIRROR v2.0 ]
+
+     Made by Hackops Academy | _hack_ops_
 BANNER
     echo -e "${BLUE}  >> OS:${WHITE} $([ "$IS_TERMUX" = true ] && echo "Termux" || echo "Kali/Linux")"
     echo -e "${BLUE}  >> Mode:${WHITE} Human-Readable Mirroring Enabled${NC}"
