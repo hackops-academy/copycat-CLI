@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+<title>CopyCat GUI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Chakra+Petch:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============== TITLE BAR ============== -->
+<header id="titlebar">
+  <div class="tb-brand">
+    <img class="tb-logo" src="app-icon.png" alt="CopyCat">
+    <span class="tb-name">COPYCAT<span class="tb-name-accent">//GUI</span></span>
+    <span class="tb-ver">v3.0</span>
+  </div>
+  <div class="tb-drag"></div>
+  <div class="tb-controls">
+    <button id="tb-min" class="tb-btn" title="Minimize">&#8212;</button>
+    <button id="tb-max" class="tb-btn" title="Maximize">&#9633;</button>
+    <button id="tb-close" class="tb-btn tb-btn-close" title="Close">&#10005;</button>
+  </div>
+</header>
+
+<div id="shell">
+
+  <!-- ============== NAV RAIL ============== -->
+  <nav id="rail">
+    <button class="rail-tab active" data-tab="mirror">
+      <span class="rail-ico">&#8862;</span><span>Mirror</span>
+    </button>
+    <button class="rail-tab" data-tab="recon">
+      <span class="rail-ico">&#8981;</span><span>Recon</span>
+    </button>
+    <button class="rail-tab" data-tab="extract">
+      <span class="rail-ico">&#9741;</span><span>Extractor</span>
+    </button>
+    <button class="rail-tab" data-tab="mindmap">
+      <span class="rail-ico">&#10021;</span><span>Mindmap</span>
+    </button>
+    <div class="rail-spacer"></div>
+    <button class="rail-tab" data-tab="workspace">
+      <span class="rail-ico">&#128193;</span><span>Workspace</span>
+    </button>
+  </nav>
+
+  <!-- ============== MAIN PANELS ============== -->
+  <main id="panels">
+
+    <!-- ---------- MIRROR ---------- -->
+    <section class="panel active" id="panel-mirror">
+      <div class="panel-head">
+        <h1>Site Mirror</h1>
+        <p class="panel-sub">Human-readable wget mirror &mdash; assets sorted, endpoints extracted.</p>
+      </div>
+      <div class="hud-frame">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="field-row">
+          <label for="mirror-url">TARGET URL</label>
+          <input id="mirror-url" type="text" placeholder="https://example.com" spellcheck="false">
+          <button id="mirror-run" class="btn-primary">Run Mirror</button>
+        </div>
+      </div>
+      <div class="result-row" id="mirror-result"></div>
+    </section>
+
+    <!-- ---------- RECON ---------- -->
+    <section class="panel" id="panel-recon">
+      <div class="panel-head">
+        <h1>Passive Recon</h1>
+        <p class="panel-sub">Certificate-transparency subdomain enumeration, optional fast port scan.</p>
+      </div>
+      <div class="hud-frame">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="field-row">
+          <label for="recon-domain">TARGET DOMAIN</label>
+          <input id="recon-domain" type="text" placeholder="example.com" spellcheck="false">
+          <button id="recon-run" class="btn-primary">Run Recon</button>
+        </div>
+        <label class="chk-row">
+          <input type="checkbox" id="recon-portscan">
+          <span>Include Nmap fast port scan (requires nmap installed)</span>
+        </label>
+      </div>
+      <div class="result-row" id="recon-result"></div>
+    </section>
+
+    <!-- ---------- EXTRACTOR ---------- -->
+    <section class="panel" id="panel-extract">
+      <div class="panel-head">
+        <h1>Endpoint / Secret-Candidate Extractor</h1>
+        <p class="panel-sub">Scans a mirrored site for URLs and secret-shaped strings for manual review.</p>
+      </div>
+      <div class="hud-frame">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="field-row">
+          <label for="extract-dir">MIRROR DIRECTORY</label>
+          <input id="extract-dir" type="text" placeholder="Run a mirror first, or paste a mirror/ path" spellcheck="false">
+          <button id="extract-run" class="btn-primary">Run Extractor</button>
+        </div>
+      </div>
+      <div class="result-row" id="extract-result"></div>
+      <div id="findings-table-wrap"></div>
+    </section>
+
+    <!-- ---------- MINDMAP ---------- -->
+    <section class="panel" id="panel-mindmap">
+      <div class="panel-head">
+        <h1>Visual Mindmap</h1>
+        <p class="panel-sub">Domain &rarr; subdomains &rarr; mirrored site structure, rendered as a force graph.</p>
+      </div>
+      <div class="hud-frame">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="field-row">
+          <label for="mindmap-domain">DOMAIN</label>
+          <input id="mindmap-domain" type="text" placeholder="example.com" spellcheck="false">
+          <button id="mindmap-run" class="btn-primary">Build Mindmap</button>
+        </div>
+        <div class="field-row small">
+          <label for="mindmap-subs">SUBDOMAINS FILE</label>
+          <input id="mindmap-subs" type="text" placeholder="auto-filled after Recon" spellcheck="false">
+          <label for="mindmap-mirror">MIRROR DIR</label>
+          <input id="mindmap-mirror" type="text" placeholder="auto-filled after Mirror" spellcheck="false">
+        </div>
+      </div>
+      <div class="graph-wrap">
+        <div class="radar-sweep" id="radar-sweep"></div>
+        <div id="mindmap-canvas"></div>
+        <div class="graph-legend">
+          <span><i class="dot dot-root"></i>domain</span>
+          <span><i class="dot dot-subdomain"></i>subdomain</span>
+          <span><i class="dot dot-folder"></i>folder</span>
+          <span><i class="dot dot-page"></i>page</span>
+          <span><i class="dot dot-asset"></i>assets</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- WORKSPACE ---------- -->
+    <section class="panel" id="panel-workspace">
+      <div class="panel-head">
+        <h1>Workspace</h1>
+        <p class="panel-sub">Where run folders (mirror / scans / metadata) are written.</p>
+      </div>
+      <div class="hud-frame">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="field-row">
+          <label>ROOT</label>
+          <input id="workspace-root" type="text" readonly>
+          <button id="workspace-pick" class="btn-primary">Change&hellip;</button>
+        </div>
+      </div>
+      <h2 class="sub-heading">Past Runs</h2>
+      <ul id="workspace-runs" class="run-list"></ul>
+    </section>
+
+  </main>
+
+</div>
+
+<!-- ============== CONSOLE (sits below #shell, not inside it) ============== -->
+<footer id="console">
+  <div class="console-drag" id="console-drag" title="Drag to resize"></div>
+  <div class="console-head">
+    <span class="console-title">// LIVE LOG</span>
+    <div class="console-head-actions">
+      <button id="console-clear">clear</button>
+      <button id="console-toggle" title="Collapse log">&#9660;</button>
+    </div>
+  </div>
+  <div id="console-body"></div>
+</footer>
+
+<script src="../node_modules/vis-network/standalone/umd/vis-network.min.js"></script>
+<script src="renderer.js"></script>
+</body>
+</html>
